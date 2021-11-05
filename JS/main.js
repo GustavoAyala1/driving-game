@@ -13,11 +13,44 @@ const handleTurn = (event) => {
   if (spaceKey !== "Space") {
     direction = key.slice(5).toLowerCase();
   }
-
+  console.log(direction);
   if (spaceKey === "Space") {
     moving = "stopped";
     $car.className = `car ${direction}`;
     clearInterval(start);
+    if (direction === "right") {
+      setTimeout(() => {
+        moving = "running";
+        start = setInterval(() => {
+          left += 2;
+          $car.style.left = `${left}px`;
+        }, 16);
+      }, 3000);
+    } else if (direction === "up") {
+      setTimeout(() => {
+        start = setInterval(() => {
+          moving = "running";
+          topandbottom -= 2;
+          $car.style.top = `${topandbottom}px`;
+        }, 16);
+      }, 3000);
+    } else if (direction === "left") {
+      setTimeout(() => {
+        start = setInterval(() => {
+          moving = "running";
+          left -= 2;
+          $car.style.left = `${left}px`;
+        }, 16);
+      }, 3000);
+    } else if (direction === "down") {
+      setTimeout(() => {
+        start = setInterval(() => {
+          moving = "running";
+          topandbottom += 2;
+          $car.style.top = `${topandbottom}px`;
+        }, 16);
+      }, 3000);
+    }
   } else if (key === "ArrowUp") {
     moving = "running";
     $car.className = "car up";
